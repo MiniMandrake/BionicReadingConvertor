@@ -1,5 +1,56 @@
-<html>
-  hi
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <iframe src="url" title="description"></iframe>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+    ></script>
+    <title>Bionic Reader</title>
+  </head>
+  <body>
+    <input type="file" id="input" multiple />
+
+    <p id="Demo">text</p>
+
+    <script>
+      async function getPayload() {
+        const url = "https://bionic-reading1.p.rapidapi.com/convert";
+        const data = new FormData();
+
+        const selectedFile = document.getElementById("input").files[0];
+
+        let insert = "Hello";
+
+        data.append("content", insert);
+        data.append("response_type", "html");
+        data.append("request_type", "html");
+        data.append("fixation", "1");
+        data.append("saccade", "10");
+
+        const options = {
+          method: "POST",
+          headers: {
+            "x-rapidapi-key":
+              "1a5a7bc8cemshd00b7071346980cp1d4334jsn2b7195570453",
+            "x-rapidapi-host": "bionic-reading1.p.rapidapi.com",
+          },
+          body: data,
+        };
+
+        try {
+          const response = await fetch(url, options);
+          const result = await response.text();
+          console.log(result);
+          // document.write(result);
+          document.getElementById("Demo").innerHTML = result;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      getPayload();
+    </script>
+  </body>
 </html>
