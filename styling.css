@@ -1,0 +1,19 @@
+.container {
+  max-width: 1200px; /* Maximum width of the container */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 0 20px; /* Adds some horizontal padding */
+  width: 100%; /* Ensures the container takes up the full width up to the max-width */
+  box-sizing: border-box; /* Ensures padding is included in the total width/height */
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px; /* Reduce padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px; /* Even smaller padding for very small screens */
+  }
+}
