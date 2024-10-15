@@ -1,7 +1,8 @@
 .container {
   max-width: 1200px; /* Maximum width of the container */
-  margin: 0 auto; /* Centers the container horizontally */
-  padding: 0 20px; /* Adds some horizontal padding */
+  margin: 20px auto; /* Centers the container horizontally */
+  padding-left: 0 40px; /* Adds some horizontal padding */
+  padding-right: 0 40px; /* Adds some horizontal padding */
   width: 100%; /* Ensures the container takes up the full width up to the max-width */
   box-sizing: border-box; /* Ensures padding is included in the total width/height */
 }
@@ -16,4 +17,36 @@
   .container {
     padding: 0 10px; /* Even smaller padding for very small screens */
   }
+}
+
+#dropzone {
+  width: 200px; /* Full width */
+  max-width: 400px; /* Maximum width for the dropzone */
+  height: 100px; /* Height of the dropzone */
+  border: 2px dotted #ccc; /* Dotted border with a gray color */
+  border-radius: 10px; /* Rounded corners */
+  display: flex; /* Flexbox for centering content */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  color: #777; /* Default text color */
+  font-size: 18px; /* Text size */
+  background-color: #f9f9f9; /* Light background */
+  transition: border-color 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+  /* on click button hover here */
+  /*cursor: pointer; /* Pointer cursor on hover */
+}
+
+.dropzone:hover {
+  border-color: #90ee90; /* Light green border on hover */
+  background-color: #f0fff0; /* Slight greenish background on hover */
+}
+
+.dropzone.dragover {
+  border-color: #90ee90; /* Light green border when dragging file over */
+  background-color: #f0fff0; /* Slight greenish background when dragging */
+}
+
+/* Optional: Style for active dragging state */
+.dropzone:active {
+  border-color: #32cd32; /* Darker green on active drag */
 }

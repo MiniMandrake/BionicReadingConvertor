@@ -10,6 +10,17 @@
   <body>
     <div class="container">
       <input type="file" id="input" />
+
+      <div
+        class="dropzone"
+        id="dropzone"
+        ondrop="dropHandler(event);"
+        ondragover="dragOverHandler(event);"
+      >
+        <p style="text-align: center">
+          Drag one file here. <br /><i>Currently not functional</i>
+        </p>
+      </div>
       <p id="output">
         Hello! Input a file above and your text will appear here!
       </p>

@@ -29,7 +29,6 @@ async function getPayload(payload) {
 
 function readFile() {
   const fileInput = document.getElementById("input");
-  const out = document.getElementById("output");
 
   fileInput.addEventListener("change", (event) => {
     const files = event.target.files;
@@ -43,6 +42,8 @@ function readFile() {
       reader.onload = (e) => {
         const fileContent = e.target.result;
         console.log(fileContent);
+        // Send payload to server
+        // convert input into bionic text
         getPayload(fileContent);
       };
       console.log("bruh");
@@ -53,5 +54,68 @@ function readFile() {
 
 readFile();
 
-// getPayload("gello");
-// getPayload(text);
+// HERE ON IS THE DRAG AND DROP FUNCTION
+
+function dropHandler(ev) {
+  console.log("File(s) dropped");
+
+  // Prevent default behavior (Prevent file from being opened)
+  ev.preventDefault();
+
+  if (ev.dataTransfer.items) {
+    // Use DataTransferItemList interface to access the file(s)
+    [...ev.dataTransfer.items].forEach((item, i) => {
+      // If dropped items aren't files, reject them
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        // console.log(`… file[${i}].name = ${file.name}`);
+      }
+    });
+  } else {
+    // Use DataTransfer interface to access the file(s)
+    [...ev.dataTransfer.files].forEach((file, i) => {
+      // console.log(`… file[${i}].name = ${file.name}`);
+    });
+  }
+}
+
+function dragOverHandler(ev) {
+  console.log("File(s) in drop zone");
+
+  // Prevent default behavior (Prevent file from being opened)
+  ev.preventDefault();
+}
+
+function dropFileHandler() {
+  const dropzone = document.getElementById("dropzone");
+  const output = document
+    .getElementById("output")
+
+    [
+      // Prevent default behaviors for dragover and drop to enable file drop
+      ("dragover", "drop")
+    ].forEach((eventType) => {
+      dropzone.addEventListener(eventType, (event) => {
+        event.preventDefault();
+      });
+    });
+
+  dropzone.addEventListener("drop", (event) => {
+    event.preventDefault();
+
+    // Access the dropped files
+    const files = event.dataTransfer.files;
+
+    // Iterate through the files and display their names
+    if (files.length > 0) {
+      let fileDetails = "Files dropped:\n";
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        fileDetails += `File Name: ${file.name}\nSize: ${file.size} bytes\nType: ${file.type}\n\n`;
+      }
+      getPayload(fileDetails);
+    } else {
+      output.textContent = "No files dropped.";
+    }
+  });
+}
